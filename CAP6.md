@@ -1,0 +1,12 @@
+# Programación funcional
+
+- Los conceptos de programación funcional vienen inclusive antes de la programación en sí misma. El paradigma esta fuertemente basado en el l-calculus de Alonso Church en el 1930.
+- Las variables en lenguajes funcionales no mutan.
+- En otras palabras, todos los problemas que enfrentamos en aplicaciones concurrentes, todos los problemas que enfrentamos en aplicaciones que requieren múltiples subprocesos y múltiples procesadores, no pueden suceder si no hay variables mutables.
+- Como arquitecto debemos estar interesados en la concurrencia. El diseño debe ser robusto en la presencia de múltiples hilos y procesadores. Pero la pregunta es si la inmutabilidad en practicable.
+- La respuesta es sí, si tenemos almacenamiento y velocidad de procesador infinita. Si no, la respuesta es un poco más matizada. Pero si, la inmutabilidad puede ser practicada si ciertos compromisos son hechos.
+  - **Segregación de mutabilidad**: Consiste en segregar la aplicación o los servicios dentro de ella en componentes mutables y no inmutables. Los componentes inmutables realizan sus tareas sin usar variables mutables, pero se comunican con uno o más componentes mutables que permiten al estado de sus variables ser mutadas. Ya que la mutación de estado expone a estos componentes de todo tipo de problemas de concurrencia, es una práctica común usar algún tipo de *memoria transaccional* para proteger las variables mutables de actualizaciones concurrentes y condiciones de carrera. Sería prudente que los arquitectos introduzcan la mayor cantidad de procesamiento posible en los componentes inmutables y eliminen la mayor cantidad de código posible de aquellos componentes que deben permitir la mutación.
+  -  **FUENTE DE EVENTOS**: Cuanta más memoria tengamos y más rápidas sean nuestras máquinas, menos necesitamos un estado mutable. Fuente de eventos es una estrategía donde almacenamos las transacciones, pero no el estado. Cuando el estado es requerido, aplicamos todas las transacciones desde el comienzo de los tiempos. Se utiliza cuando queremos que el esquema funcione por algún tiempo razonable, no por siempre. Se pueden tomar atajos de por ejemplo, computar y guardar los estados cada medianoche.
+
+# Conclusión
+> El software se compone de secuencia, selección, iteración e indirección. Nada mas. Nada menos.
